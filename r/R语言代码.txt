@@ -1,0 +1,14 @@
+install.packages("igraph")
+library(igraph)
+data <- read.csv("D:\\1.csv")
+data2 <- data[1:5000,] 
+g2 <- graph.data.frame(data2)
+
+
+com <- walktrap.community(g2)
+V(g2)$sg=com$membership+1
+V(g2)$color=rainbow(max(V(g2)$sg))[V(g2)$sg]
+
+
+plot(g2,layout=layout.fruchterman.reingold,vertex.label=NA,vertex.size=3,edge.color=grey(0.5),edge.arrow.mode='-')
+
